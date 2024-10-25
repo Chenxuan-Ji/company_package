@@ -1,9 +1,5 @@
 # company/__init__.py
 
-
-
-# company/__init__.py
-
 # Import the main Company class for easy access
 from .base_company import Company
 
