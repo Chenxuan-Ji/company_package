@@ -3,11 +3,11 @@ requires = ["setuptools", "wheel", "setuptools_scm"]  # Build requirements
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "companies_package"
-# No explicit version here, managed by setuptools_scm
+name = "company"
+dynamic = ["version"]
 description = "A Python package for modeling companies across various sectors."
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.9"
 license = { file = "LICENSE" }
 authors = [
     { name = "Your Name", email = "your.email@example.com" },
@@ -34,12 +34,9 @@ dependencies = [
 "Source" = "https://github.com/yourusername/companies_package"
 "Issues" = "https://github.com/yourusername/companies_package/issues"
 
-[tool.setuptools]
-# Use setuptools_scm for dynamic versioning
-dynamic = ["version"]
 
 [tool.setuptools_scm]
-write_to = "src/company/version.py"  # Where to write the dynamic version
+write_to = "company/version.py"  # Where to write the dynamic version
 
 [tool.setuptools.packages.find]
-where = ["src"]
+where = ["."]

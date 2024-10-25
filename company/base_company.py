@@ -19,25 +19,27 @@ class Company:
         """Displays basic information about the company."""
         print(f"Company Name: {self.name}")
         if self.ticker:
-            print(f"Ticker Symbol: {self.ticker}")
+            print(f"Ticker Symbol is: {self.ticker}")
 
-    def get_public_status(self):
+    def get_yfinance_status(self):
         """
-        Checks if the company is publicly traded based on yfinance ticker validity.
+        Checks if the company stock data is available on yfinance.
 
         Returns:
-        - str: "Publicly Traded" if the ticker is valid in yfinance, otherwise "Privately Held".
+        - str: "Available on yfinance" if the ticker has stock history data, otherwise "Not available on yfinance".
         """
         if self.ticker:
             stock = yf.Ticker(self.ticker)
             try:
-                info = stock.info
-                if info:
-                    return "Publicly Traded"
+                # Check if there is any historical data for the ticker
+                history = stock.history(period="1d")
+                if not history.empty:
+                    return "Available on yfinance"
             except Exception as e:
                 print(f"Error checking ticker {self.ticker}: {e}")
-                
-        return "Privately Held"
+        
+        return "Not available on yfinance"
+
 
     def get_stock_info(self, period="1y"):
         """
