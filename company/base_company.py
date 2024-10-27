@@ -59,3 +59,38 @@ class Company:
         history = stock.history(period=period)
 
         return history
+
+
+
+    def summarize_activity(self, *args, **kwargs):
+        """
+        Summarizes company activities and additional information.
+
+        Parameters:
+        - *args: A list of activities related to the company.
+        - **kwargs: Additional information, like location or date.
+        """
+        print(f"\nActivity Summary for {self.name}:")
+        
+        if args:
+            print("Activities:")
+            for activity in args:
+                print(f" - {activity}")
+        
+        if kwargs:
+            print("Additional Information:")
+            for key, value in kwargs.items():
+                print(f" - {key.capitalize()}: {value}")
+
+
+
+        # Initialize activities if it hasn't been set yet
+        if not hasattr(self, 'activities'):
+            self.activities = []  # Only created when summarize_activity is called
+
+        # Store activities in the instance
+        self.activities.extend(args)
+
+        # Set each key-value pair in kwargs as an attribute
+        for key, value in kwargs.items():
+            setattr(self, key, value)  # Dynamically create an attribute

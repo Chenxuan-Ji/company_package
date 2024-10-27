@@ -1,6 +1,6 @@
-# Companies Package
+# Company Package
 
-The **Companies Package** is a Python package designed to model companies across different sectors.
+The **Company Package** is a Python package designed to model companies across different sectors.
 
 ## Features
 

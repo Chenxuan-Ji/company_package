@@ -1,5 +1,5 @@
 # company/medical/medical.py
-
+from importlib.resources import files
 import pandas as pd
 from ..base_company import Company
 
@@ -21,35 +21,36 @@ class MedicalCompany(Company):
     def display_info(self):
         """Displays basic information about the medical company."""
         super().display_info()
-        print(f"Specialty: {self.specialty}")
+        print(f"Medical Specialty: {self.specialty}")
         print(f"Drug Manufacturer: {'Yes' if self.drug_manufacturer else 'No'}")
 
-    def drug_approval_summary(self, dataset_path):
+    def drug_approval_summary(self, dataset_path=None):
         """
-        Prints a summary of drug approval attempts for the company's drugs, 
-        including whether the company is available on yfinance.
-
+        Prints a summary of drug approval attempts for the company's drugs.
+        
         Parameters:
         - dataset_path (str): Path to the dataset with drug approval data.
+          If not provided, uses the default package data file.
         """
         if not self.drug_manufacturer:
             print(f"{self.name} is not involved in drug manufacturing.")
             return
 
-        # Use the inherited method to check if the company is available on yfinance
-        availability_status = self.get_yfinance_status()
+        # Use default dataset if no path is provided
+        if not dataset_path:
+            dataset_path = files("company").joinpath("data/drug_data.csv")
 
         try:
             # Load dataset
             data = pd.read_csv(dataset_path)
             
-            # Filter data for this company's drugs (assuming "company_name" and "approval_attempts" columns exist)
+            # Filter data for this company's drugs
             company_data = data[data["company_name"] == self.name]
             
             # Summarize approval attempts
-            summary = company_data.groupby("drug_name")["approval_attempts"].max() - 1  # Minus 1 for the successful attempt
+            summary = company_data.groupby("drug_name")["approval_attempts"].max() - 1
 
-            print(f"\nDrug Approval Summary for {self.name} ({availability_status}):")
+            print(f"\nDrug Approval Summary for {self.name}:")
             for drug, attempts in summary.items():
                 print(f" - {drug}: {attempts} failed attempt(s) before approval")
         

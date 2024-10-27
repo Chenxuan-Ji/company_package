@@ -40,3 +40,6 @@ write_to = "company/version.py"  # Where to write the dynamic version
 
 [tool.setuptools.packages.find]
 where = ["."]
+
+[tool.setuptools.package-data]
+"company" = ["data/*"]
