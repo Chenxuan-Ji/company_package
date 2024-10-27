@@ -27,6 +27,9 @@ dependencies = [
     "numpy",
     "pandas",
     "yfinance",
+    "argparse",
+    "datetime",
+    "importlib.resources"
 ]
 
 [project.urls]
@@ -43,3 +46,7 @@ where = ["."]
 
 [tool.setuptools.package-data]
 "company" = ["data/*"]
+
+
+[project.scripts]
+company = "company.cli:main"

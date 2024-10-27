@@ -18,12 +18,17 @@ def get_stock_price_difference(ticker, interval, stop_date):
     """
     company = Company(name="N/A", ticker=ticker)
     stop_date = datetime.datetime.strptime(stop_date, "%Y-%m-%d")
+    
+    # Retrieve stock data
     stock_data = company.get_stock_info(period=interval)
-
     if stock_data is None:
         print("No stock data available.")
         return
 
+    # Make stock_data.index timezone-naive by removing timezone
+    stock_data.index = stock_data.index.tz_localize(None)
+
+    # Filter stock data up to the specified stop date
     stock_data = stock_data[stock_data.index <= stop_date]
     if stock_data.empty:
         print("No data available for the given period and stop date.")
@@ -34,7 +39,6 @@ def get_stock_price_difference(ticker, interval, stop_date):
     price_difference = end_price - start_price
 
     print(f"Stock price difference for {ticker} over {interval} ending {stop_date.date()}: {price_difference}")
-
 
 
 def main():
