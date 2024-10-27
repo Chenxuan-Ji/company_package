@@ -24,10 +24,10 @@ pip install -e .
 Here's a quick example of how to use the package:
 
 ```python
-import companies_package as cp
+import company as cp
 
-fintech_company = cp.FinTechCompany("ByteFinance Inc", financial_focus="Blockchain", ticker="BFI")
-fintech_company.display_info()
+my_company = cp.Company(name="Nvidia", ticker="NVDA")
+my_company.display_info()
 
 ```
 
