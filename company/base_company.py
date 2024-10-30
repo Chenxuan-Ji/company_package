@@ -4,6 +4,9 @@ import yfinance as yf
 import pandas as pd
 
 class Company:
+    """
+    A class representing a company.
+    """
     def __init__(self, name, ticker=None):
         """
         Initialize a Company instance.

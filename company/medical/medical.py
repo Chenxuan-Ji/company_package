@@ -31,6 +31,15 @@ class MedicalCompany(Company):
         Parameters:
         - dataset_path (str): Path to the dataset with drug approval data.
           If not provided, uses the default package data file.
+
+        Example:
+            >>> medical_company = MedicalCompany("Pfizer", "Pharmaceuticals", drug_manufacturer=True)
+            >>> medical_company.drug_approval_summary()
+            
+            Drug Approval Summary for Pfizer:
+             - Drug A: 2 failed attempt(s) before approval
+             - Drug B: 0 failed attempt(s) before approval
+             - Drug C: 1 failed attempt(s) before approval
         """
         if not self.drug_manufacturer:
             print(f"{self.name} is not involved in drug manufacturing.")

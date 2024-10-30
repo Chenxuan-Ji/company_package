@@ -42,6 +42,9 @@ def get_stock_price_difference(ticker, interval, stop_date):
 
 
 def main():
+    """
+    Main function for the CLI tool.
+    """
     parser = argparse.ArgumentParser(description="Company CLI Tool")
     subparsers = parser.add_subparsers(dest="command")
 
